@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetailPenjualan;
 use App\Models\Produk;
 use App\Models\Stock;
 use App\Models\User;
@@ -34,6 +35,13 @@ class DashboardController extends Controller
 
     public function purchase()
     {
-        return view('pages.product.purchase');
+        $products = Produk::all();
+        return view('pages.product.purchase', compact('products'));
+    }
+
+    public function detail()
+    {
+        $detail = DetailPenjualan::all();
+        return view('pages.product.detail', compact('detail'));
     }
 }

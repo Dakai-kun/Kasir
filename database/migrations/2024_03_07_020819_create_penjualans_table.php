@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('penjualans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pelanggan_id');
+            $table->date('sale_date');
             $table->string('total_price');
             $table->timestamps();
         });

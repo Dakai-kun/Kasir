@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pelanggans', function (Blueprint $table) {
             $table->id();
-            $table->string('costumer_name');
+            $table->string('customer_name');
             $table->string('address');
             $table->string('phone_number');
             $table->timestamps();

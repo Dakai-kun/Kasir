@@ -98,7 +98,7 @@
                                                     <td>
                                                         <form action="{{ route('goods.delete', $product->id) }}" method="get">
                                                         @csrf
-                                                            <button type="button" data-bs-toggle="modal" data-bs-target="#editModal" class="btn btn-primary">Edit</button>
+                                                            <button type="button" data-bs-toggle="modal" data-bs-target="#editModal{{ $product->id }}" class="btn btn-primary">Edit</button>
                                                             <button type="submit" class="btn btn-danger">Delete</button>
                                                             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateStockModal">Tambah Stock</button>
                                                         </form>
@@ -107,7 +107,7 @@
                                             </tbody>
                                             @endforeach
                                         </table>
-
+                                        
                                     </div>
 
                                 </div>
@@ -118,18 +118,19 @@
 
                 </div>
     </section>
-    <div class="modal fade" id="editModal" tabindex="-1">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
+    @foreach($products as $product)
+    <div class="modal fade" id="editModal{{ $product->id }}" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title">Add Product</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
+                                                    aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    @foreach ($products as $product)
                                                     <form class="row g-3" action="{{ route('goods.update', $product->id) }}" method="POST">
-                                                    @csrf
+                                                        @csrf
+                                                        @method('PATCH')
                                                         <div class="col-12">
                                                             <label for="product_name" class="form-label">Product
                                                                 Name</label>
@@ -143,7 +144,6 @@
                                                                 <input type="number" name="price" class="form-control" id="price" value="{{$product->price}}">
                                                             </div>
                                                         </div>
-                                                    @endforeach
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
@@ -154,7 +154,7 @@
                                             </div>
                                         </div>
                                     </div>
-</main><!-- End #main -->
+                                </main><!-- End #main -->
 
 <div class="modal fade" id="updateStockModal" tabindex="-1">
                                         <div class="modal-dialog">
@@ -163,17 +163,16 @@
                                                     <h5 class="modal-title">Add Product</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
-                                                </div>
+                                                    </div>
                                                 <div class="modal-body">
-                                                    @foreach ($products as $product)
                                                     <form class="row g-3" action="{{ route('stock', $product->id) }}" method="POST">
-                                                    @csrf
+                                                        @method('PATCH')
+                                                        @csrf
                                                         <div class="col-12">
                                                             <label for="product_name" class="form-label">Stock</label>
                                                             <input type="text" class="form-control" name="stock"
                                                                 id="product_name" value="{{$product->stock}}">
                                                         </div>
-                                                    @endforeach
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
@@ -184,5 +183,6 @@
                                             </div>
                                         </div>
                                     </div>
-</main><!-- End #main -->
+                                    @endforeach
+                                </main><!-- End #main -->
 @endsection

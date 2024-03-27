@@ -10,6 +10,7 @@ class Penjualan extends Model
     use HasFactory;
     protected $fillable = [
         'pelanggan_id',
+        'sale_date',
         'total_price',
     ];
 
